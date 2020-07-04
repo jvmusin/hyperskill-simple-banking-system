@@ -3,7 +3,7 @@ package banking.menu.command;
 import banking.CardService;
 import banking.InputReader;
 import banking.Session;
-import banking.Util;
+import banking.Luhn;
 
 public class DoTransferCommand implements Command {
     private final InputReader in;
@@ -30,7 +30,7 @@ public class DoTransferCommand implements Command {
             System.out.println();
             return;
         }
-        if (!Util.checkLuhnChecksum(toNumber)) {
+        if (!Luhn.validate(toNumber)) {
             System.out.println("Probably you made mistake in the card number. Please try again!");
             System.out.println();
             return;

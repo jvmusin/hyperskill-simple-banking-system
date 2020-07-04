@@ -12,15 +12,7 @@ public class CardGenerator {
     private String generateCardNumber() {
         StringBuilder res = new StringBuilder(PREFIX);
         while (res.length() < CARD_NUMBER_LENGTH - 1) res.append(rnd.nextInt(10));
-        int sum = 0;
-        for (int i = 0; i < res.length(); i++) {
-            int x = res.charAt(i) - '0';
-            if (i % 2 == 0) x *= 2;
-            if (x > 9) x -= 9;
-            sum += x;
-        }
-        int checkSum = (10 - (sum % 10)) % 10;
-        return res.toString() + checkSum;
+        return Luhn.withChecksum(res.toString());
     }
 
     private String generatePinCode() {
